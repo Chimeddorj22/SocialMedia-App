@@ -44,7 +44,7 @@ class _EditProfileState extends State<EditProfile> {
                 child: GestureDetector(
                   onTap: () => viewModel.editProfile(context),
                   child: Text(
-                    'SAVE',
+                    'Хадгалах',
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       fontSize: 15.0,

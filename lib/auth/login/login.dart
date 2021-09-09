@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
             SizedBox(height: 10.0),
             Center(
               child: Text(
-                'Welcome back!',
+                'Буцаад тавтай морил!',
                 style: TextStyle(
                   fontSize: 23.0,
                   fontWeight: FontWeight.w900,
@@ -49,7 +49,7 @@ class _LoginState extends State<Login> {
             ),
             Center(
               child: Text(
-                'Log into your account and get started!',
+                'Та өөрийн бүртгэлээр нэвтэрнэ үү! ',
                 style: TextStyle(
                   fontSize: 12.0,
                   fontWeight: FontWeight.w300,
@@ -63,14 +63,14 @@ class _LoginState extends State<Login> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'t have an account?'),
+                Text('Хэрвээ бүртгэлгүй бол '),
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context)
                         .push(CupertinoPageRoute(builder: (_) => Register()));
                   },
                   child: Text(
-                    'Sign up',
+                    'Бүртгүүлэх',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).accentColor,
@@ -94,7 +94,7 @@ class _LoginState extends State<Login> {
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.mail,
-            hintText: "Email",
+            hintText: "Имэйл хаяг",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateEmail,
             onSaved: (String val) {
@@ -108,7 +108,7 @@ class _LoginState extends State<Login> {
             enabled: !viewModel.loading,
             prefix: Feather.lock,
             suffix: Feather.eye,
-            hintText: "Password",
+            hintText: "Нууц үг",
             textInputAction: TextInputAction.done,
             validateFunction: Validations.validatePassword,
             submitAction: () => viewModel.login(context),
@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
-                      'Forgot Password?',
+                      'Нууц үг мартсан',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),
@@ -157,7 +157,7 @@ class _LoginState extends State<Login> {
               ),
               // highlightElevation: 4.0,
               child: Text(
-                'Log in'.toUpperCase(),
+                'Нэвтрэх'.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12.0,

@@ -8,11 +8,15 @@ import 'package:social_media_app/components/stream_builder_wrapper.dart';
 import 'package:social_media_app/components/stream_grid_wrapper.dart';
 import 'package:social_media_app/models/post.dart';
 import 'package:social_media_app/models/user.dart';
+import 'package:social_media_app/pages/CreateDoc.dart';
 import 'package:social_media_app/screens/edit_profile.dart';
 import 'package:social_media_app/screens/settings.dart';
 import 'package:social_media_app/utils/firebase.dart';
 import 'package:social_media_app/widgets/post_tiles.dart';
 import 'package:social_media_app/widgets/posts_view.dart';
+
+import 'deviceList.dart';
+import 'generate.dart';
 
 class Profile extends StatefulWidget {
   final profileId;
@@ -23,7 +27,7 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-class _ProfileState extends State<Profile>  {
+class _ProfileState extends State<Profile> {
   User user;
   bool isLoading = false;
   int postCount = 0;
@@ -61,7 +65,7 @@ class _ProfileState extends State<Profile>  {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('WOOBLE'),
+        title: Text('Miner Assistant'),
         actions: [
           widget.profileId == firebaseAuth.currentUser.uid
               ? Center(
@@ -74,7 +78,7 @@ class _ProfileState extends State<Profile>  {
                             CupertinoPageRoute(builder: (_) => Register()));
                       },
                       child: Text(
-                        'Log Out',
+                        'Гарах',
                         style: TextStyle(
                             fontWeight: FontWeight.w900, fontSize: 15.0),
                       ),
@@ -92,7 +96,7 @@ class _ProfileState extends State<Profile>  {
             floating: false,
             toolbarHeight: 5.0,
             collapsedHeight: 6.0,
-            expandedHeight: 220.0,
+            expandedHeight: 260.0,
             flexibleSpace: FlexibleSpaceBar(
               background: StreamBuilder(
                 stream: usersRef.doc(widget.profileId).snapshots(),
@@ -138,11 +142,11 @@ class _ProfileState extends State<Profile>  {
                                           ),
                                         ),
                                         Container(
-                                          width: 130.0,
+                                          width: 140.0,
                                           child: Text(
                                             user?.country,
                                             style: TextStyle(
-                                              fontSize: 12.0,
+                                              fontSize: 14.0,
                                               fontWeight: FontWeight.w600,
                                             ),
                                             maxLines: 1,
@@ -181,7 +185,7 @@ class _ProfileState extends State<Profile>  {
                                                     color: Theme.of(context)
                                                         .accentColor),
                                                 Text(
-                                                  'settings',
+                                                  'Тохиргоо',
                                                   style:
                                                       TextStyle(fontSize: 11.5),
                                                 )
@@ -200,7 +204,7 @@ class _ProfileState extends State<Profile>  {
                           child: user.bio.isEmpty
                               ? Container()
                               : Container(
-                                  width: 200,
+                                  width: MediaQuery.of(context).size.width,
                                   child: Text(
                                     user?.bio,
                                     style: TextStyle(
@@ -232,7 +236,7 @@ class _ProfileState extends State<Profile>  {
                                       QuerySnapshot snap = snapshot.data;
                                       List<DocumentSnapshot> docs = snap.docs;
                                       return buildCount(
-                                          "POSTS", docs?.length ?? 0);
+                                          "ХМТАЦ", docs?.length ?? 0);
                                     } else {
                                       return buildCount("POSTS", 0);
                                     }
@@ -257,9 +261,9 @@ class _ProfileState extends State<Profile>  {
                                       QuerySnapshot snap = snapshot.data;
                                       List<DocumentSnapshot> docs = snap.docs;
                                       return buildCount(
-                                          "FOLLOWERS", docs?.length ?? 0);
+                                          "БҮТАХ", docs?.length ?? 0);
                                     } else {
-                                      return buildCount("FOLLOWERS", 0);
+                                      return buildCount("Цаг ажилсан", 0);
                                     }
                                   },
                                 ),
@@ -282,7 +286,7 @@ class _ProfileState extends State<Profile>  {
                                       QuerySnapshot snap = snapshot.data;
                                       List<DocumentSnapshot> docs = snap.docs;
                                       return buildCount(
-                                          "FOLLOWING", docs?.length ?? 0);
+                                          "ХХХА-н грүпп", docs?.length ?? 0);
                                     } else {
                                       return buildCount("FOLLOWING", 0);
                                     }
@@ -292,7 +296,59 @@ class _ProfileState extends State<Profile>  {
                             ),
                           ),
                         ),
-                        buildProfileButton(user),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Грүппийн ахлагч: ',
+                              style: TextStyle(
+                                //    color: Color(0xff4D4D4D),
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              maxLines: null,
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 10.0),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            buildProfileButton(user),
+                            IconButton(
+                              icon: Icon(
+                                CupertinoIcons.create_solid,
+                                size: 30.0,
+                                color: Theme.of(context).accentColor,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (_) => CreateDoc(),
+                                  ),
+                                );
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                CupertinoIcons.list_bullet,
+                                size: 30.0,
+                                color: Theme.of(context).accentColor,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (_) => Followerlist(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ],
                     );
                   }
@@ -519,13 +575,13 @@ class _ProfileState extends State<Profile>  {
   buildPosts() {
     return StreamBuilderWrapper(
       shrinkWrap: true,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
       stream: postRef
           .where('ownerId', isEqualTo: widget.profileId)
-          .orderBy('timestamp', descending: true)
+          // .orderBy('timestamp', descending: true)
           .snapshots(),
       physics: NeverScrollableScrollPhysics(),
-      itemBuilder: (_, DocumentSnapshot snapshot) {
+      itemBuilder: (context, snapshot) {
         PostModel posts = PostModel.fromJson(snapshot.data());
         return Padding(
           padding: const EdgeInsets.only(bottom: 15.0),
@@ -543,7 +599,7 @@ class _ProfileState extends State<Profile>  {
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       stream: postRef
           .where('ownerId', isEqualTo: widget.profileId)
-          .orderBy('timestamp', descending: true)
+          // .orderBy('timestamp', descending: true)
           .snapshots(),
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_, DocumentSnapshot snapshot) {

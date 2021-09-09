@@ -11,8 +11,8 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="social_media_app"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Уурхайчны зөвлөх"
+        android:icon="@mipmap/new1">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

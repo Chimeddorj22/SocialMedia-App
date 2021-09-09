@@ -9,10 +9,26 @@ class RegisterViewModel extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool validate = false;
   bool loading = false;
-  String username, email, country, password, cPassword;
+  String username,
+      lastname,
+      firstname,
+      email,
+      tabel,
+      country,
+      tseh,
+      section,
+      group,
+      password,
+      cPassword;
   FocusNode usernameFN = FocusNode();
+  FocusNode lastnameFN = FocusNode();
+  FocusNode firstnameFN = FocusNode();
   FocusNode emailFN = FocusNode();
+  FocusNode tabelFN = FocusNode();
   FocusNode countryFN = FocusNode();
+  FocusNode tsehFN = FocusNode();
+  FocusNode sectionFN = FocusNode();
+  FocusNode groupFN = FocusNode();
   FocusNode passFN = FocusNode();
   FocusNode cPassFN = FocusNode();
   AuthService auth = AuthService();
@@ -24,17 +40,24 @@ class RegisterViewModel extends ChangeNotifier {
       validate = true;
       notifyListeners();
       showInSnackBar(
-          'Please fix the errors in red before submitting.', context);
+          'Бүртгүүлэхэд алдаа гарлаа та мэдээллүүдээ шалгаад дахин оролдоно уу.',
+          context);
     } else {
       if (password == cPassword) {
         loading = true;
         notifyListeners();
         try {
           bool success = await auth.createUser(
-            name: username,
+            name: lastname + " " + firstname,
+            lastname: lastname,
+            firstname: firstname,
             email: email,
+            tabel: tabel,
             password: password,
             country: country,
+            tseh: tseh,
+            section: section,
+            group: group,
           );
           print(success);
           if (success) {
@@ -64,6 +87,11 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  setTabel(val) {
+    tabel = val;
+    notifyListeners();
+  }
+
   setPassword(val) {
     password = val;
     notifyListeners();
@@ -74,6 +102,16 @@ class RegisterViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  setlastname(val) {
+    lastname = val;
+    notifyListeners();
+  }
+
+  setfirstname(val) {
+    firstname = val;
+    notifyListeners();
+  }
+
   setConfirmPass(val) {
     cPassword = val;
     notifyListeners();
@@ -81,6 +119,21 @@ class RegisterViewModel extends ChangeNotifier {
 
   setCountry(val) {
     country = val;
+    notifyListeners();
+  }
+
+  setTseh(val) {
+    tseh = val;
+    notifyListeners();
+  }
+
+  setSection(val) {
+    section = val;
+    notifyListeners();
+  }
+
+  setGroup(val) {
+    group = val;
     notifyListeners();
   }
 

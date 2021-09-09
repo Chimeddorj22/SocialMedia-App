@@ -125,14 +125,23 @@ class ChatItem extends StatelessWidget {
   }
 
   buildCounter(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<DocumentSnapshot>(
       stream: messageBodyStream(),
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+      builder: (context, snapshot) {
+        print("counter hooson");
+        print("counter ${snapshot.hasData.toString()}");
         if (snapshot.hasData) {
+          print("counter1 ");
           DocumentSnapshot snap = snapshot.data;
-          Map usersReads = snap.get('reads') ?? {};
-          int readCount = usersReads[currentUserId] ?? 0;
-          int counter = messageCount - readCount;
+          print("counter2 ");
+          // Map usersReads = snap.get('reads') ?? {};
+          // print("counter3 ");
+          // int readCount = usersReads[currentUserId] ?? 0;
+          print("counter4 ");
+          int counter = messageCount;
+
+          print("counter $counter");
+
           if (counter == 0) {
             return SizedBox();
           } else {
@@ -160,7 +169,7 @@ class ChatItem extends StatelessWidget {
             );
           }
         } else {
-          return SizedBox();
+          return Text('data');
         }
       },
     );

@@ -57,7 +57,7 @@ class FabContainer extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: Center(
                   child: Text(
-                    'Create Post',
+                    'Нийтлэл бичих',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -71,7 +71,7 @@ class FabContainer extends StatelessWidget {
                   CupertinoIcons.camera_on_rectangle,
                   size: 25.0,
                 ),
-                title: Text('Make a Post'),
+                title: Text('Шинээр нийтлэл оруулах'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.of(context).push(

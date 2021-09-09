@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
           children: [
             SizedBox(height: 10.0),
             Text(
-              'Welcome to Wooble Social App..\nCreate a new account and connect with friends',
+              '"Уурхайчны туслах" апп-д тавтай морил. Та бүртгүүлснээр хамт олонтойгоо холбогдох боломжтой.',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18.0,
@@ -42,7 +42,7 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Already have an account  ',
+                  'Хэрэв та бүртгэлтэй бол ',
                 ),
                 GestureDetector(
                   onTap: () {
@@ -50,7 +50,7 @@ class _RegisterState extends State<Register> {
                         .push(CupertinoPageRoute(builder: (_) => Login()));
                   },
                   child: Text(
-                    'Login',
+                    'Нэвтрэх',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).accentColor,
@@ -74,39 +74,104 @@ class _RegisterState extends State<Register> {
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.user,
-            hintText: "Username",
+            hintText: "Овог",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateName,
             onSaved: (String val) {
-              viewModel.setName(val);
+              viewModel.setlastname(val);
             },
-            focusNode: viewModel.usernameFN,
+            focusNode: viewModel.lastnameFN,
+            nextFocusNode: viewModel.firstnameFN,
+          ),
+          SizedBox(height: 20.0),
+          TextFormBuilder(
+            enabled: !viewModel.loading,
+            prefix: Feather.user,
+            hintText: "Нэр",
+            textInputAction: TextInputAction.next,
+            validateFunction: Validations.validateName,
+            onSaved: (String val) {
+              viewModel.setfirstname(val);
+            },
+            focusNode: viewModel.firstnameFN,
             nextFocusNode: viewModel.emailFN,
           ),
           SizedBox(height: 20.0),
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.mail,
-            hintText: "Email",
+            hintText: "Имэйл",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateEmail,
             onSaved: (String val) {
               viewModel.setEmail(val);
             },
             focusNode: viewModel.emailFN,
+            nextFocusNode: viewModel.tabelFN,
+          ),
+          SizedBox(height: 20.0),
+          TextFormBuilder(
+            enabled: !viewModel.loading,
+            prefix: Feather.toggle_left,
+            hintText: "Табелийн дугаар",
+            textInputAction: TextInputAction.next,
+            validateFunction: Validations.validateName,
+            onSaved: (String val) {
+              viewModel.setTabel(val);
+            },
+            focusNode: viewModel.tabelFN,
             nextFocusNode: viewModel.countryFN,
           ),
           SizedBox(height: 20.0),
           TextFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.map_pin,
-            hintText: "Country",
+            hintText: "Амьдардаг газар",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validateName,
             onSaved: (String val) {
               viewModel.setCountry(val);
             },
             focusNode: viewModel.countryFN,
+            nextFocusNode: viewModel.tsehFN,
+          ),
+          SizedBox(height: 20.0),
+          TextFormBuilder(
+            enabled: !viewModel.loading,
+            prefix: Feather.map_pin,
+            hintText: "Цех",
+            textInputAction: TextInputAction.next,
+            validateFunction: Validations.validateName,
+            onSaved: (String val) {
+              viewModel.setTseh(val);
+            },
+            focusNode: viewModel.tsehFN,
+            nextFocusNode: viewModel.sectionFN,
+          ),
+          SizedBox(height: 20.0),
+          TextFormBuilder(
+            enabled: !viewModel.loading,
+            prefix: Feather.map_pin,
+            hintText: "Хэсэг",
+            textInputAction: TextInputAction.next,
+            validateFunction: Validations.validateName,
+            onSaved: (String val) {
+              viewModel.setSection(val);
+            },
+            focusNode: viewModel.sectionFN,
+            nextFocusNode: viewModel.groupFN,
+          ),
+          SizedBox(height: 20.0),
+          TextFormBuilder(
+            enabled: !viewModel.loading,
+            prefix: Feather.map_pin,
+            hintText: "Групп",
+            textInputAction: TextInputAction.next,
+            validateFunction: Validations.validateName,
+            onSaved: (String val) {
+              viewModel.setGroup(val);
+            },
+            focusNode: viewModel.groupFN,
             nextFocusNode: viewModel.passFN,
           ),
           SizedBox(height: 20.0),
@@ -114,7 +179,7 @@ class _RegisterState extends State<Register> {
             enabled: !viewModel.loading,
             prefix: Feather.lock,
             suffix: Feather.eye,
-            hintText: "Password",
+            hintText: "Нууц үг",
             textInputAction: TextInputAction.next,
             validateFunction: Validations.validatePassword,
             obscureText: true,
@@ -128,7 +193,7 @@ class _RegisterState extends State<Register> {
           PasswordFormBuilder(
             enabled: !viewModel.loading,
             prefix: Feather.lock,
-            hintText: "Confirm Password",
+            hintText: "Нууц үг давтах",
             textInputAction: TextInputAction.done,
             validateFunction: Validations.validatePassword,
             submitAction: () => viewModel.register(context),
@@ -153,7 +218,7 @@ class _RegisterState extends State<Register> {
                     Theme.of(context).accentColor),
               ),
               child: Text(
-                'sign up'.toUpperCase(),
+                'Бүртгүүлэх'.toUpperCase(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 12.0,

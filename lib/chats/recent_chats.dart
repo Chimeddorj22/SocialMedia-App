@@ -16,7 +16,7 @@ class Chats extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
-          onTap: (){
+          onTap: () {
             Navigator.pop(context);
           },
           child: Icon(Icons.keyboard_backspace),
@@ -84,10 +84,7 @@ class Chats extends StatelessWidget {
   }
 
   Stream<QuerySnapshot> userChatsStream(String uid) {
-    return chatRef
-        .where('users', arrayContains: '$uid')
-        .orderBy('lastTextTime', descending: true)
-        .snapshots();
+    return chatRef.where('users', arrayContains: '$uid').snapshots();
   }
 
   Stream<QuerySnapshot> messageListStream(String documentId) {

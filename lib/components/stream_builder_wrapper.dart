@@ -34,6 +34,7 @@ class StreamBuilderWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var list = snapshot.data.docs.toList();
+          print("urt" + list.length.toString());
           return list.length == 0
               ? Padding(
                   padding: const EdgeInsets.only(top: 100.0),
@@ -55,7 +56,6 @@ class StreamBuilderWrapper extends StatelessWidget {
                     return itemBuilder(context, list[index]);
                   },
                 );
-
         } else {
           return circularProgress(context);
         }

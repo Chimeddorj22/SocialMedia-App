@@ -15,6 +15,8 @@ import 'package:social_media_app/services/post_service.dart';
 import 'package:social_media_app/utils/firebase.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+import 'desctext.dart';
+
 class UserPost extends StatelessWidget {
   final PostModel post;
 
@@ -50,6 +52,7 @@ class UserPost extends StatelessWidget {
             children: [
               Column(
                 children: [
+                  buildUser(context),
                   ClipRRect(
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10.0),
@@ -60,6 +63,14 @@ class UserPost extends StatelessWidget {
                       height: 300.0,
                       fit: BoxFit.cover,
                       width: double.infinity,
+                    ),
+                  ),
+                  Visibility(
+                    visible: post.description != null &&
+                        post.description.toString().isNotEmpty,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 10.0, top: 3.0),
+                      child: new DescriptionTextWidget(text: post?.description),
                     ),
                   ),
                   Padding(
@@ -132,35 +143,25 @@ class UserPost extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Visibility(
-                          visible: post.description != null &&
-                              post.description.toString().isNotEmpty,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 10.0, top: 3.0),
-                            child: Text(
-                              '${post?.description ?? ""}',
-                              style: TextStyle(
-                                color:
-                                    Theme.of(context).textTheme.caption.color,
-                                fontSize: 15.0,
-                              ),
-                              maxLines: 2,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 10.0, bottom: 5.0),
+                              child: Text(
+                                  timeago.format(post.timestamp.toDate()) + " ",
+                                  style: TextStyle(fontSize: 10.0)),
                             ),
-                          ),
+                          ],
                         ),
-                        SizedBox(height: 3.0),
-                        Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Text(timeago.format(post.timestamp.toDate()),
-                              style: TextStyle(fontSize: 10.0)),
-                        ),
+
                         // SizedBox(height: 5.0),
                       ],
                     ),
                   )
                 ],
               ),
-              buildUser(context),
             ],
           );
         },
@@ -222,10 +223,10 @@ class UserPost extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 7.0),
       child: Text(
-        '$count likes',
+        '$count хүнд таалагдсан',
         style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 10.0,
+          fontSize: 12.0,
         ),
       ),
     );
@@ -235,8 +236,8 @@ class UserPost extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 0.5),
       child: Text(
-        '-   $count comments',
-        style: TextStyle(fontSize: 8.5, fontWeight: FontWeight.bold),
+        '-   $count сэтгэгдэл',
+        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
       ),
     );
   }

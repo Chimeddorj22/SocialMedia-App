@@ -8,19 +8,36 @@ class AuthService {
     return user;
   }
 
-//create a firebase user 
+//create a firebase user
   Future<bool> createUser(
       {String name,
+      String lastname,
+      String firstname,
       User user,
       String email,
+      String tabel,
       String country,
+      String tseh,
+      String section,
+      String group,
       String password}) async {
     var res = await firebaseAuth.createUserWithEmailAndPassword(
       email: '$email',
       password: '$password',
     );
     if (res.user != null) {
-      await saveUserToFirestore(name, res.user, email, country);
+      await saveUserToFirestore(
+        name,
+        lastname,
+        firstname,
+        res.user,
+        email,
+        tabel,
+        country,
+        tseh,
+        section,
+        group,
+      );
       return true;
     } else {
       return false;
@@ -29,18 +46,33 @@ class AuthService {
 
 //this will save the details inputted by the user to firestore.
   saveUserToFirestore(
-      String name, User user, String email, String country) async {
+    String name,
+    String lastname,
+    String firstname,
+    User user,
+    String email,
+    String tabel,
+    String country,
+    String tseh,
+    String section,
+    String group,
+  ) async {
     await usersRef.doc(user.uid).set({
       'username': name,
+      'lastname': lastname,
+      'firstname': firstname,
       'email': email,
+      'tabel': tabel,
       'time': Timestamp.now(),
       'id': user.uid,
-      'bio': "",
+      'bio': "Энэ бол таны био",
       'country': country,
+      'tseh': tseh,
+      'section': section,
+      'group': group,
       'photoUrl': user.photoURL ?? ''
     });
   }
-
 
 //function to login a user with his email and password
   Future<bool> loginUser({String email, String password}) async {

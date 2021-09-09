@@ -12,37 +12,55 @@ class _LandingState extends State<Landing> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: MediaQuery.of(context).size.height / 15),
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: const EdgeInsets.only(left: 10.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Image.asset(
-                  'assets/images/new1.png',
-                  height: 200.0,
-                  width: 200.0,
+                  'assets/images/logo.png',
+                  height: 50.0,
+                  width: 250.0,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
+            SizedBox(height: MediaQuery.of(context).size.height / 15),
             Text(
-              'WOOBLE',
+              'Уурхайчны зөвлөх',
               style: TextStyle(
-                fontSize: 22.0,
+                fontSize: 30.0,
+                color: Colors.black,
                 fontWeight: FontWeight.w900,
                 fontFamily: 'Ubuntu-Regular',
               ),
-            )
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 15),
+            Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Image.asset(
+                  'assets/images/applogo.png',
+                  height: 250.0,
+                  width: 250.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Spacer(),
           ],
         ),
       ),
       bottomNavigationBar: BottomAppBar(
         elevation: 0.0,
+        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.only(left: 20.0, right: 20.0, bottom: 20.0),
           child: Row(
@@ -67,13 +85,13 @@ class _LandingState extends State<Landing> {
                       end: Alignment.bottomLeft,
                       colors: [
                         Theme.of(context).accentColor,
-                        Color(0xff597FDB),
+                        Color.fromRGBO(8, 148, 124, 1),
                       ],
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      'LOGIN',
+                      'Нэвтрэх',
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
@@ -98,13 +116,13 @@ class _LandingState extends State<Landing> {
                       end: Alignment.bottomLeft,
                       colors: [
                         Theme.of(context).accentColor,
-                        Color(0xff597FDB),
+                        Color.fromRGBO(8, 148, 124, 1),
                       ],
                     ),
                   ),
                   child: Center(
                     child: Text(
-                      'SIGN UP',
+                      'Бүртгүүлэх',
                       style: TextStyle(
                         fontWeight: FontWeight.w900,
                         color: Colors.white,

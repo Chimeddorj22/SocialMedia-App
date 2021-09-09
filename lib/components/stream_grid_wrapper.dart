@@ -32,6 +32,7 @@ class StreamGridWrapper extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           var list = snapshot.data.docs.toList();
+          print('grid ${list.length}');
           return list.length == 0
               ? Container(
                   child: Center(
